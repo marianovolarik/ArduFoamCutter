@@ -27,21 +27,20 @@ void setup()
   pinMode(a_dir_pin, OUTPUT);
   pinMode(z_dir_pin, OUTPUT);
 
-  // Initialize Timer1 
-  noInterrupts();           // disable all interrupts
+  /* Initialize Timer1 */
+  noInterrupts();           // Disable all interrupts
   TCCR1A = 0;
   TCNT1  = 0;
 
-  OCR1A = 38;            // compare match register 16MHz/256/2Hz
+  /* Timer tick period = 1 / (16 MHz/8) = 1/2MHz = 0.5 us */
+  OCR1A = 400*2;            // Compare Match Register
 
-  /* Setear prescaler a 8 -> 16 MHz/8 -> 2 MHz -> resolución 0.5 us */
-  /* Periodo us = 2*<value> */
   TCCR1B = 0;
-  TCCR1B |= (1 << WGM12);   /* CTC MODE: Clear Time on Compare */
-  TCCR1B |= (1 << CS12);    /* Clock source -> prescaler:256 */
+  TCCR1B |= (1 << WGM12);   // CTC MODE: Clear Time on Compare
+  TCCR1B |= (1 << CS11);    // Clock source -> prescaler:8
 
-  TIMSK1 |= (1 << OCIE1A);  /* Enable timer compare interrupt */
-  interrupts();             // enable all interrupts
+  TIMSK1 |= (1 << OCIE1A);  // Enable timer compare interrupt
+  interrupts();             // Enable all interrupts
 }
 
 
