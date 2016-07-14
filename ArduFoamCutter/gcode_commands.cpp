@@ -31,6 +31,8 @@ float z_pos;
 
 void bresenham_line_create(float x, float y, float a, float z){
 
+  float m1 = 0, m2 = 0;
+
   noInterrupts();
 
   l.dir_mask = 0x0;
@@ -49,12 +51,9 @@ void bresenham_line_create(float x, float y, float a, float z){
   l.epsilon_z = 0;
   l.epsilon_a = 0;
 
-  /* TO DO: Mejorar! */
-  l.longest_delta = 0;
-  if (l.delta_x > l.longest_delta) l.longest_delta = l.delta_x;
-  if (l.delta_y > l.longest_delta) l.longest_delta = l.delta_y;
-  if (l.delta_a > l.longest_delta) l.longest_delta = l.delta_a;
-  if (l.delta_z > l.longest_delta) l.longest_delta = l.delta_z;
+  m1 = max(l.delta_x, l.delta_y);
+  m2 = max(l.delta_a, l.delta_z);
+  l.longest_delta = max(m1, m2);
 
   l.remaining_steps = l.longest_delta;
 
