@@ -214,6 +214,9 @@ ISR(TIMER1_COMPA_vect)          // timer compare interrupt service routine
   digitalWrite(z_step_pin, LOW);
 
   l.remaining_steps--;
+  if (l.remaining_steps == 0){
+    Serial.println("ok");
+  }
 }
 
 
@@ -226,6 +229,7 @@ ISR(TIMER1_COMPA_vect)          // timer compare interrupt service routine
 void command_G90(char *parameters)
 {
   absolute_mode = true;
+  Serial.println("ok");
 }
 
 
@@ -238,4 +242,5 @@ void command_G90(char *parameters)
 void command_G91(char *parameters)
 {
   absolute_mode = false;
+  Serial.println("ok");
 }
