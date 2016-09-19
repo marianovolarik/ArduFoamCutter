@@ -121,6 +121,7 @@ class Window(QtGui.QDialog):
         self.status_l.setText(message)
         self.status_l.setStyleSheet('color: %s' % (level))
 
+
 if __name__ == '__main__':
 
     app = QtGui.QApplication(sys.argv)
